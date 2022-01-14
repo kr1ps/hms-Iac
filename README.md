@@ -2,11 +2,11 @@
 
 Terraform and Ansible project to setup an automated Home Media Server stack running on Docker and deploy to a vcenter VM server. This project is an adaptation to my own ecosystem https://github.com/kr1ps/MediaHomeServices from a complete ansible project that you can find in this link https://github.com/ahembree/ansible-hms-docker
 
-## Getting Started
+## Getting started
 
-- [Container List](#container-list)
-- [Other Features](#other-features)
-- [Supported Platforms](#supported-platforms)
+- [Container list](#container-list)
+- [Other features](#other-features)
+- [Supported platforms](#supported-platforms)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Content layout](#content-layout)
@@ -14,7 +14,7 @@ Terraform and Ansible project to setup an automated Home Media Server stack runn
 - [Connecting the containers](#connecting-the-containers)
 - [Only generate config files](#only-generate-config-files)
 
-## Container List
+## Container list
 
 - Plex: media server
 - Sonarr: tv series management
@@ -29,7 +29,7 @@ Terraform and Ansible project to setup an automated Home Media Server stack runn
 - Watchtower: automatic container updates (if enabled)
 - Cloudflare-ddns: dynamic dns (if enabled)
 
-## Other Features
+## Other features
 
 - Automated Docker installation
 - Automatic container updates
@@ -37,7 +37,7 @@ Terraform and Ansible project to setup an automated Home Media Server stack runn
 - Wildcard SSL certificate generation
 - Support for multiple network shares
 
-## Supported Platforms
+## Supported platforms
 
 - Debian based systems (Debian 9, Ubuntu 20.04+, etc.)
 
