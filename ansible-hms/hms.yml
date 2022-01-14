@@ -1,0 +1,22 @@
+---
+- name: hms-setup.
+  hosts: all
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  roles:
+    - host-config1
+
+
+  handlers:
+
+
+  pre_tasks:
+
+  tasks:
+    - name: Ping
+      ping:
+    # Host Setup
+

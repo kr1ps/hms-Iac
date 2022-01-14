@@ -1,0 +1,13 @@
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    ens192:
+      addresses:
+      - 172.18.0.24/24
+      gateway4: 172.18.0.1
+      nameservers:
+        addresses:
+        - 172.18.0.1
+        search:
+        - kr1ps.com
+  version: 2

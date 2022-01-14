@@ -1,0 +1,14 @@
+---
+# tasks file for initial host config
+- name: Set static hostname
+  hostname:
+    name: "{{ hostname_short }}"
+- name: Add FQDN to /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^127\.0\.1\.1'
+    line: '127.0.1.1 {{ hostname }} {{ hostname_short }}'
+    state: present
+- name: set timezone
+  timezone:
+    name: "{{ tmzone }}"

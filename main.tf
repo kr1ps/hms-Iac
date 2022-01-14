@@ -37,7 +37,7 @@ data "vsphere_virtual_machine" "vm_template" {
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  name             = terraform.workspace == "default" ? "prod-terraform" : "${terraform.workspace}-terraform" #"${terraform.workspace}-vm-terraform"
+  name             = terraform.workspace == "default" ? "hms-prod.kr1ps.com" : "hms-${terraform.workspace}.kr1ps.com" #"${terraform.workspace}-vm-terraform"
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
 
@@ -65,7 +65,7 @@ resource "vsphere_virtual_machine" "vm" {
 
   # this block its for auto excecute ansible playbook on new ambient. this particular one its for push ssh pub key into the user
   # provisioner "local-exec" {
-  #  command = "ansible-playbook -u '${var.ssh_user}' -i '${vsphere_virtual_machine.vm.default_ip_address},' hms.yml --key-file '~/.ssh/id_ed25519'"
+  #  command = "ansible-playbook -u '${var.ssh_user}' -i '${vsphere_virtual_machine.vm.default_ip_address},' ./ansible-hms/hms.yml --key-file '~/.ssh/id_ed25519'"
   # }
 }
 
