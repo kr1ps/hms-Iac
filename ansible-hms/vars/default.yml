@@ -20,6 +20,16 @@ plex_claim_token: ""
 #######################################################################
 
 #######################################################################
+### Docker Role vars settings
+
+docker_users:
+  - krips
+
+
+### End of Docker Role vars settings
+#######################################################################
+
+#######################################################################
 ### HMS-Docker settings
 
 # Where the media share will be mounted locally // default: "/opt/{{ project_name }}/media_data"
