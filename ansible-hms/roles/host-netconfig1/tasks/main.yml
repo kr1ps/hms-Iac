@@ -9,3 +9,4 @@
     mode: 0644
   notify:
     - netplan apply
+  when: environment == "prod"

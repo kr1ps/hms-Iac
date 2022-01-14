@@ -9,7 +9,7 @@
   roles:
     - ./roles/host-config1
     - ./roles/docker
-    #- host-netconfig1
+    - host-netconfig1
 
 
   handlers:

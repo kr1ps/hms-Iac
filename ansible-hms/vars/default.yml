@@ -25,6 +25,7 @@ plex_claim_token: ""
 docker_users:
   - krips
 
+environment: "{{ lookup('vars', tf_environment) }}"
 
 ### End of Docker Role vars settings
 #######################################################################
