@@ -77,3 +77,10 @@ output "vm_ip" {
 # output "web_url" {
 #   value = "http://${vsphere_virtual_machine.vm.default_ip_address}"
 # }
+
+# example for output variable
+# output.tf
+# output "tf_gh_deployment_status_token" {
+#   value       = var.GH_DEPLOYMENT_STATUS_TOKEN
+#   sensitive   = true
+# }

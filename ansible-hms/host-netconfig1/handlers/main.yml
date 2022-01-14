@@ -1,0 +1,6 @@
+---
+# handlers file for host-config2
+- name: netplan apply
+  command: netplan apply
+  async: 1
+  poll: 0

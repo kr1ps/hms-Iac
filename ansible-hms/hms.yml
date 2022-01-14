@@ -4,10 +4,11 @@
   become: true
 
   vars_files:
-    - vars.yml
+    - ./vars/default.yml
 
   roles:
     - host-config1
+    #- host-netconfig1c
 
 
   handlers:
