@@ -222,7 +222,7 @@ nas_client_remote_additional_paths:
 cloudflare_ddns_enabled: yes
 
 # Your Cloudflare API token that has read/write permissions for your DNS zone
-cloudflare_api_token: "9mVerBjgVSRpSkeMPaRkPng779l93zSQJ_lH54nj"
+cloudflare_api_token: ""
 
 # The domain that will be used for the Cloudflare DDNS container // default: "{{ hms_docker_domain }}"
 # Automatically uses the same domain defined above
