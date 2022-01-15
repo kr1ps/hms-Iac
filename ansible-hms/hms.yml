@@ -25,7 +25,7 @@
       ping:
 
 
-    - name: Ensure kr1ps-Docker role
+    - name: Ensure kr1ps-service role
       import_role:
         name: kr1ps-services
 
