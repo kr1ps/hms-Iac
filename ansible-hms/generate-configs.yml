@@ -6,7 +6,7 @@
     replace: '_'
 
   vars_files:
-    - roles/hmsdocker/defaults/main.yml
+    - roles/kr1ps-services/defaults/main.yml
     - vars/default.yml
 
   tasks:

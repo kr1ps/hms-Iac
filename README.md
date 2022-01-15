@@ -63,4 +63,4 @@ Terraform and Ansible project to setup an automated Home Media Server stack runn
 
 ---
 
-ANSIBLE_HOST_KEY_CHECKING=False ANSIBLE_TIMEOUT=60 ansible-playbook -u 'krips' -i '172.18.0.201,' ./ansible-hms/hms.yml -e 'tf_env=default' --key-file '~/.ssh/id_ed25519' --verbose
+ANSIBLE_HOST_KEY_CHECKING=False ANSIBLE_TIMEOUT=60 ansible-playbook -u 'krips' -i '172.18.0.203,' ./ansible-hms/hms.yml -e 'tf_env=default' --key-file '~/.ssh/id_ed25519' --verbose

@@ -2,6 +2,19 @@
 ### Any variables such as "{{ <variable> }}" will reference the variable that was defined earlier in this file
 
 #######################################################################
+### GPU settings
+# Requires supported hardware
+
+# Enables Nvidia GPU hardware accelleration within the Plex container // default: "no"
+# Requires the Nvidia drivers to already be installed and working
+enable_nvidia_gpu: no
+
+# Enables Intel GPU hardware accelleration within the Plex container // default: "no"
+enable_intel_gpu: no
+### End of GPU settings
+#######################################################################
+
+#######################################################################
 ### Plex Settings
 # Visit https://plex.tv/claim to obtain this token specific to your account
 plex_claim_token: ""
