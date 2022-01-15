@@ -346,19 +346,19 @@ hms_docker_compose_container_state: present
 #  `traefik`: Enables or disables accessing the container via Traefik
 hms_docker_container_map:
   traefik:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
   sonarr:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
   radarr:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
   bazarr:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
   transmission:
@@ -366,15 +366,15 @@ hms_docker_container_map:
     directory: yes
     traefik: yes
   portainer:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
   overseerr:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
   prowlarr:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
   plex:
@@ -382,11 +382,11 @@ hms_docker_container_map:
     directory: yes
     traefik: yes
   tautulli:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
   nzbget:
-    enabled: yes
+    enabled: no
     directory: yes
     traefik: yes
 
