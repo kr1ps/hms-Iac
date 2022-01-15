@@ -65,7 +65,7 @@ resource "vsphere_virtual_machine" "vm" {
 
   #this block its for auto excecute ansible playbook on new ambient. this particular one its for push ssh pub key into the user
   provisioner "local-exec" {
-   command = "ANSIBLE_CONFIG='./ansible.cfg' ansible-playbook -u '${var.ssh_user}' -i '${vsphere_virtual_machine.vm.default_ip_address},' ./ansible-hms/hms.yml -e 'tf-env=${terraform.workspace}' --key-file '~/.ssh/id_ed25519' --verbose"
+   command = "ANSIBLE_HOST_KEY_CHECKING=False ANSIBLE_TIMEOUT=60 tf_environment=${terraform.workspace} ansible-playbook -u '${var.ssh_user}' -i '${vsphere_virtual_machine.vm.default_ip_address},' ./ansible-hms/hms.yml --key-file '~/.ssh/id_ed25519' --verbose"
   }
 }
 

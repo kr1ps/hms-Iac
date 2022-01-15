@@ -9,4 +9,4 @@
     mode: 0644
   notify:
     - netplan apply
-  when: tf-env == "default"
+  when: tf_env == "default"
