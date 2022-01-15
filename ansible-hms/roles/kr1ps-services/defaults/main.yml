@@ -14,6 +14,8 @@ enable_intel_gpu: no
 ### End of GPU settings
 #######################################################################
 
+
+
 #######################################################################
 ### Plex Settings
 # Visit https://plex.tv/claim to obtain this token specific to your account
@@ -30,7 +32,7 @@ plex_advertise_ip: "{{ ansible_default_ipv4.address }}"
 ### HMS-Docker settings
 
 # The `project_name` controls the name of the base folders created (e.g. /opt/<project_name>/ and /mnt/<project_name>/) // default: "hms-docker"
-project_name: kr1ps-docker-services
+project_name: hms-docker
 
 # Where container data and configs are stored // default: "/opt/{{ project_name }}"
 hms_docker_data_path: "/opt/{{ project_name }}"
@@ -42,7 +44,7 @@ hms_docker_apps_path: "{{ hms_docker_data_path }}/apps"
 #    `local`: local folder path
 #    `cifs`: CIFS or SMB share
 #    `nfs`: NFS share
-hms_docker_media_share_type: nfs
+hms_docker_media_share_type: local
 
 # Where the media share will be mounted locally // default: "/opt/{{ project_name }}/media_data"
 # Recommended to change this if using `cifs` or `nfs` to a local mount point, such as "/mnt/{{ project_name }}"
@@ -72,14 +74,10 @@ hms_docker_library_folders:
       type: "tv_shows",
       folder_name: "TV_Shows"
     },
-    {
-      type: "tv_shows",
-      folder_name: "Anime"
-    },
   ]
 
 # The domain used for the Traefik proxy Host rules, SSL certificate (if enabled), and DDNS (if enabled) // default: "home.local"
-hms_docker_domain: kr1ps.com
+hms_docker_domain: home.local
 
 # Most home networks are a "/24" network, so this is the default // default: "24"
 # If you don't know what this means, leave the next 2 lines alone
@@ -109,7 +107,7 @@ container_auto_update_schedule: "0 0 9 * * *"
 container_remove_orphans: yes
 
 # The timezone to use for the containers // default: "America/New_York"
-container_timezone: America/Santo_Domingo
+container_timezone: America/New_York
 
 # User and Group ID's to use for the running processes in the containers (may cause or be the cause of permissions issues)
 #  default: "1234"
@@ -155,13 +153,13 @@ nas_client_cifs_opts: rw,soft
 
 ## NAS client NFS settings, only if `hms_docker_media_share_type` is set to `nfs`
 # The NFS remote share path to connect to // default: "nas.example.com:/share"
-nas_client_remote_nfs_path: "172.18.0.45:/mnt/user/movies"
+nas_client_remote_nfs_path: "nas.example.com:/share"
 
 # The NFS options to use for the mount, Google should be able to help troubleshoot // default: "defaults"
 nas_client_nfs_opts: defaults
 
 # If you have more than one remote share path to use, you can enable this setting and define them below, please be sure to read the required values for each share type (CIFS, NFS, local)
-nas_client_use_additional_paths: yes
+nas_client_use_additional_paths: no
 
 ### Follow the example template after these required values
 # Required values for `local` folder type:
@@ -190,32 +188,20 @@ nas_client_use_additional_paths: yes
 nas_client_remote_additional_paths:
   [
     {
-      name: "Movies",
-      remote_path: "172.18.0.45:/mnt/user/movies",
-      local_mount_path: "{{ hms_docker_mount_path }}_movies",
+      name: "Media NAS 2",
+      remote_path: "nas.example.com:/volume1/media_2",
+      local_mount_path: "{{ hms_docker_mount_path }}_custom_path_2",
       type: nfs,
       nfs_opts: defaults,
     },
     {
-      name: "Media tv",
-      remote_path: "172.18.0.45:/mnt/user/tv",
-      local_mount_path: "{{ hms_docker_mount_path }}_tv",
-      type: nfs,
-      nfs_opts: defaults,
-    },
-    {
-      name: "Media anime",
-      remote_path: "172.18.0.45:/mnt/user/anime",
-      local_mount_path: "{{ hms_docker_mount_path }}_anime",
-      type: nfs,
-      nfs_opts: defaults,
-    },
-    {
-      name: "Media downloads",
-      remote_path: "172.18.0.45:/mnt/user/downloads",
-      local_mount_path: "{{ hms_docker_mount_path }}_downloads",
-      type: nfs,
-      nfs_opts: defaults,
+      name: "Media NAS 3",
+      remote_path: "//nas.example.com/media_3",
+      local_mount_path: "{{ hms_docker_mount_path }}_custom_path_3",
+      type: cifs,
+      cifs_username: "",
+      cifs_password: "",
+      cifs_opts: "rw,soft",
     },
   ]
 ### End of NAS settings
@@ -226,7 +212,7 @@ nas_client_remote_additional_paths:
 #######################################################################
 ### Cloudflare DDNS settings
 # Enables or disables the Cloudflare DDNS container // default: "no"
-cloudflare_ddns_enabled: yes
+cloudflare_ddns_enabled: no
 
 # Your Cloudflare API token that has read/write permissions for your DNS zone
 cloudflare_api_token: ""
@@ -255,14 +241,14 @@ cloudflare_ddns_create_ipv6_aaaa_record: no
 #######################################################################
 ### SSL and Traefik settings
 # Enables or Disables SSL wildcard certificate generation // default: "no"
-traefik_ssl_enabled: yes
+traefik_ssl_enabled: no
 
 # Whether to use the staging/testing URL or production URL // default: "yes"
 # If SSL is enabled and this is set to yes, check to make sure the generated certificate is issued from the "STAGING" certificate authority before changing this to "no"
 traefik_ssl_use_letsencrypt_staging_url: yes
 
 # The DNS provider to use for SSL generation, check this for supported providers: https://doc.traefik.io/traefik/https/acme/#providers
-traefik_ssl_dns_provider_code: "cloudflare"
+traefik_ssl_dns_provider_code: ""
 
 # The DNS zone to use for SSL generation, this will use the domain defined above // default: "{{ hms_docker_domain }}"
 traefik_ssl_dns_provider_zone: "{{ hms_docker_domain }}"
@@ -280,7 +266,7 @@ traefik_ssl_dns_resolver_1: "1.1.1.1"
 traefik_ssl_dns_resolver_2: "1.0.0.1"
 
 # Required for Let's Encrypt, the email address to use when generating your SSL certificate
-traefik_ssl_letsencrypt_email: " me@kr1ps.com"
+traefik_ssl_letsencrypt_email: ""
 
 # The Traefik log level, helpful for troubleshooting SSL issues // default: "INFO"
 traefik_log_level: "INFO"
@@ -317,7 +303,7 @@ transmission_dns_2: "8.8.4.4"
 
 # This will cause Transmission to download the files to your NAS instead of a local folder (useful if you download a lot at once and your server doesn't have a lot of space)
 # If enabled, a new "apps" folder will be created within your library folder
-transmission_use_nas_for_downloads: yes
+transmission_use_nas_for_downloads: no
 
 # Additional environment variables for Transmission (can be found at link above)
 transmission_additional_env_vars:
@@ -353,35 +339,35 @@ hms_docker_compose_container_state: present
 #  `traefik`: Enables or disables accessing the container via Traefik
 hms_docker_container_map:
   traefik:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   sonarr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   radarr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   bazarr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   transmission:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   portainer:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   overseerr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   prowlarr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   plex:
@@ -389,11 +375,11 @@ hms_docker_container_map:
     directory: yes
     traefik: yes
   tautulli:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   nzbget:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
 
