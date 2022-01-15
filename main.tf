@@ -54,7 +54,7 @@ resource "vsphere_virtual_machine" "vm" {
   disk {
     label            = "disk0"
     thin_provisioned = true
-    size             = 100
+    size             = 120
   }
 
   guest_id = "ubuntu64Guest"
