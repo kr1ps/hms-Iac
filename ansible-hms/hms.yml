@@ -7,8 +7,8 @@
     - ./vars/default.yml
 
   roles:
-    - ./roles/host-config1
-    - ./roles/docker
+    - host-config1
+    - docker
     - host-netconfig1
 
 
