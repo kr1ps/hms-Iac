@@ -10,9 +10,20 @@
     - ./vars/default.yml
 
   roles:
-    - docker
+    - host-config1
+    - host-netconfig1
+
+
+  handlers:
+
+
+  pre_tasks:
 
   tasks:
+    - name: Ping
+      ping:
+
+
     - name: Ensure kr1ps-service role
       import_role:
         name: kr1ps-services
