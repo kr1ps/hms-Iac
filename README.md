@@ -63,3 +63,4 @@ Terraform and Ansible project to setup an automated Home Media Server stack runn
 
 ---
 
+ansible-playbook -u '{{user-name}}' -i '{{static-ip}},' ./ansible-hms/hms.yml  --key-file '~/.ssh/id_ed25519'
