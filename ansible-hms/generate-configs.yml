@@ -18,13 +18,13 @@
 
     - name: Ensure Traefik config.
       template:
-        src: roles/hmsdocker/templates/traefik.yml.j2
+        src: roles/kr1ps-services/templates/traefik.yml.j2
         dest: "{{ hms_docker_data_path }}/traefik.yml"
         mode: 0644
 
     - name: Ensure docker-compose.yml file.
       template:
-        src: roles/hmsdocker/templates/docker-compose.yml.j2
+        src: roles/kr1ps-services/templates/docker-compose.yml.j2
         dest: "{{ hms_docker_data_path }}/docker-compose.yml"
         group: docker
         mode: 0644
