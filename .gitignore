@@ -33,3 +33,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 .terraform.lock.hcl
+
+
+# ignore local files
+ansible-hms/roles/kr1ps-services/defaults/main.yml
