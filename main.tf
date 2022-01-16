@@ -63,7 +63,7 @@ resource "vsphere_virtual_machine" "vm" {
     template_uuid = data.vsphere_virtual_machine.vm_template.id
   }
 
-  # #this block its for auto excecute ansible playbook on new ambient. this particular one its for push ssh pub key into the user
+  # #this block its for auto excecute ansible playbook on new ambient. this particular one its for the intial config (nameserver, static ip, etc)
    provisioner "local-exec" {
     command = "ansible-playbook -u '${var.ssh_user}' -i '${vsphere_virtual_machine.vm.default_ip_address},' ./ansible-hms/host-pre.yml -e 'tf_env=${terraform.workspace}' --key-file '~/.ssh/id_ed25519'"
    }
