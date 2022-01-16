@@ -36,4 +36,4 @@ terraform.rc
 
 
 # ignore local files
-ansible-hms/roles/kr1ps-services/defaults/main.yml
+#ansible-hms/roles/kr1ps-services/defaults/main.yml
