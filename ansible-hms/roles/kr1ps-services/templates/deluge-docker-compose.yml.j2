@@ -1,0 +1,36 @@
+{% if hms_docker_container_map['deluge']['enabled'] %}
+  # Deluge container, torrent client
+  deluge:
+    image: linuxserver/deluge:latest
+    container_name: deluge
+    restart: {{ container_restart_policy }}
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+    networks:
+      - "download_net"
+      - "traefik_net"
+    environment:
+      - PUID={{ container_uid }}
+      - PGID={{ container_gid }}
+      - TZ={{ container_timezone }}
+{% if hms_docker_container_map['deluge']['traefik'] %}
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.deluge-{{ project_name }}.loadbalancer.server.port=8112
+      - "traefik.http.routers.deluge-{{ project_name }}.middlewares=internal-ipwhitelist"
+      - "traefik.http.routers.deluge-{{ project_name }}.middlewares=external-ipwhitelist"
+
+{% endif %}
+    volumes:
+      - {{ hms_docker_apps_path }}/deluge/config:/config
+      - {{ hms_docker_mount_path }}_movies:/movies
+      - {{ hms_docker_mount_path }}_tv:/tv
+      - {{ hms_docker_mount_path }}_anime:/anime
+      - {{ hms_docker_mount_path }}_downloads:/downloads
+{% if container_expose_ports or not hms_docker_container_map['traefik']['enabled'] %}
+    ports:
+      - 8112:8112
+{% endif %}
+{% endif %}
