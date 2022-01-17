@@ -102,7 +102,7 @@ hms_docker_network_subnet: "{{ ansible_default_ipv4.network }}/{{ hms_docker_sub
 container_restart_policy: unless-stopped
 
 # Enables the "watchtower" container to automatically download and apply container updates // default: "yes"
-container_enable_auto_updates: no
+container_enable_auto_updates: yes
 
 # The cron-style schedule for the watchtower container to check for updates in UTC time // default: "0 0 9 * * *"
 container_auto_update_schedule: "0 0 9 * * *"
