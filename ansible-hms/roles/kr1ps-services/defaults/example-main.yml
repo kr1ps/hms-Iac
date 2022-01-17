@@ -51,7 +51,7 @@ hms_docker_media_share_type: nfs
 hms_docker_mount_path: "/mnt/{{ project_name }}"
 
 # The name of the folder that will have the library folders defined below// default: "_library"
-hms_docker_library_folder_name: "_library"
+hms_docker_library_folder_name: ""
 
 # This just combines the mount path and media folder name, recommended to leave this alone // default: "{{ hms_docker_mount_path }}/{{ hms_docker_library_folder_name }}"
 hms_docker_media_path: "{{ hms_docker_mount_path }}/{{ hms_docker_library_folder_name }}"
@@ -115,8 +115,8 @@ container_timezone: America/Santo_Domingo
 
 # User and Group ID's to use for the running processes in the containers (may cause or be the cause of permissions issues)
 #  default: "1234"
-container_uid: 1234
-container_gid: 1234
+container_uid: krips
+container_gid: krips
 
 # This will download all of the containers before attempting to start them // default: "yes"
 container_pull_images_first: yes
@@ -194,7 +194,7 @@ nas_client_remote_additional_paths:
     {
       name: "Movies",
       remote_path: "172.18.0.45:/mnt/user/movies",
-      local_mount_path: "{{ hms_docker_mount_path }}_tv",
+      local_mount_path: "{{ hms_docker_mount_path }}_movies",
       type: nfs,
       nfs_opts: defaults,
     },
@@ -228,7 +228,7 @@ nas_client_remote_additional_paths:
 #######################################################################
 ### Cloudflare DDNS settings
 # Enables or disables the Cloudflare DDNS container // default: "no"
-cloudflare_ddns_enabled: no
+cloudflare_ddns_enabled: yes
 
 # Your Cloudflare API token that has read/write permissions for your DNS zone
 cloudflare_api_token: ""
@@ -257,14 +257,14 @@ cloudflare_ddns_create_ipv6_aaaa_record: no
 #######################################################################
 ### SSL and Traefik settings
 # Enables or Disables SSL wildcard certificate generation // default: "no"
-traefik_ssl_enabled: no
+traefik_ssl_enabled: yes
 
 # Whether to use the staging/testing URL or production URL // default: "yes"
 # If SSL is enabled and this is set to yes, check to make sure the generated certificate is issued from the "STAGING" certificate authority before changing this to "no"
-traefik_ssl_use_letsencrypt_staging_url: yes
+traefik_ssl_use_letsencrypt_staging_url: no
 
 # The DNS provider to use for SSL generation, check this for supported providers: https://doc.traefik.io/traefik/https/acme/#providers
-traefik_ssl_dns_provider_code: ""
+traefik_ssl_dns_provider_code: "cloudflare"
 
 # The DNS zone to use for SSL generation, this will use the domain defined above // default: "{{ hms_docker_domain }}"
 traefik_ssl_dns_provider_zone: "{{ hms_docker_domain }}"
@@ -375,15 +375,15 @@ hms_docker_container_map:
     directory: yes
     traefik: yes
   portainer:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   overseerr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   prowlarr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   plex:
