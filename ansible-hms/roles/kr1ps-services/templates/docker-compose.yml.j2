@@ -256,29 +256,14 @@ services:
       - traefik.enable=true
       - traefik.http.services.sonarr-{{ project_name }}.loadbalancer.server.port=8989
       - "traefik.http.routers.sonarr-{{ project_name }}.middlewares=internal-ipwhitelist"
-      - "traefik.http.routers.sonarr-{{ project_name }}.middlewares=external-ipwhitelist"
+
 {% endif %}
     volumes:
       - {{ hms_docker_apps_path }}/sonarr/config:/config
-{% if (transmission_use_nas_for_downloads is defined and transmission_use_nas_for_downloads) and (hms_docker_media_share_type == 'nfs' or hms_docker_media_share_type == 'cifs') %}
-      - {{ hms_docker_mount_path }}/apps/transmission/completed:/completed
-{% else %}
-      - {{ hms_docker_apps_path }}/transmission/completed:/completed
-{% endif %}
-{% for folder in hms_docker_library_folders %}
-{% if folder.type == "tv_shows" %}
-      - {{ hms_docker_media_path }}/{{ folder.folder_name }}:/data_{{ folder.folder_name | map('regex_replace', regex, replace) | list | join }}
-{% endif %}
-{% endfor %}
-{% if nas_client_remote_additional_paths is defined and nas_client_use_additional_paths is defined and nas_client_use_additional_paths %}
-{% for path in nas_client_remote_additional_paths %}
-{% for folder in hms_docker_library_folders %}
-{% if folder.type == "tv_shows" %}
-      - {{ path.local_mount_path }}/{{ hms_docker_library_folder_name }}/{{ folder.folder_name }}:/data_nas_additional/{{ path.name | map('regex_replace', regex, replace) | list | join }}/{{ folder.folder_name }}
-{% endif %}
-{% endfor %}
-{% endfor %}
-{% endif %}
+      - {{ hms_docker_mount_path }}_movies:/movies
+      - {{ hms_docker_mount_path }}_tv:/tv
+      - {{ hms_docker_mount_path }}_anime:/anime
+      - {{ hms_docker_mount_path }}_downloads:/downloads
 {% if container_expose_ports or not hms_docker_container_map['traefik']['enabled'] %}
     ports:
       - 8989:8989
@@ -307,29 +292,15 @@ services:
       - traefik.enable=true
       - traefik.http.services.radarr-{{ project_name }}.loadbalancer.server.port=7878
       - "traefik.http.routers.radarr-{{ project_name }}.middlewares=internal-ipwhitelist"
-      - "traefik.http.routers.radarr-{{ project_name }}.middlewares=external-ipwhitelist"
+
 {% endif %}
     volumes:
       - {{ hms_docker_apps_path }}/radarr/config:/config
-{% if (transmission_use_nas_for_downloads is defined and transmission_use_nas_for_downloads) and (hms_docker_media_share_type == 'nfs' or hms_docker_media_share_type == 'cifs') %}
-      - {{ hms_docker_mount_path }}/apps/transmission/completed:/completed
-{% else %}
-      - {{ hms_docker_apps_path }}/transmission/completed:/completed
-{% endif %}
-{% for folder in hms_docker_library_folders %}
-{% if folder.type == "movies" %}
-      - {{ hms_docker_media_path }}/{{ folder.folder_name }}:/data_{{ folder.folder_name | map('regex_replace', regex, replace) | list | join }}
-{% endif %}
-{% endfor %}
-{% if nas_client_remote_additional_paths is defined and nas_client_use_additional_paths is defined and nas_client_use_additional_paths %}
-{% for path in nas_client_remote_additional_paths %}
-{% for folder in hms_docker_library_folders %}
-{% if folder.type == "movies" %}
-      - {{ path.local_mount_path }}/{{ hms_docker_library_folder_name }}/{{ folder.folder_name }}:/data_nas_additional/{{ path.name | map('regex_replace', regex, replace) | list | join }}/{{ folder.folder_name }}
-{% endif %}
-{% endfor %}
-{% endfor %}
-{% endif %}
+      - {{ hms_docker_mount_path }}_movies:/movies
+      - {{ hms_docker_mount_path }}_tv:/tv
+      - {{ hms_docker_mount_path }}_anime:/anime
+      - {{ hms_docker_mount_path }}_downloads:/downloads
+
 {% if container_expose_ports or not hms_docker_container_map['traefik']['enabled'] %}
     ports:
       - 7878:7878
@@ -358,21 +329,10 @@ services:
       - TZ={{ container_timezone }}
     volumes:
       - {{ hms_docker_apps_path }}/bazarr/config:/config
-{% for folder in hms_docker_library_folders %}
-{% if folder.type == "tv_shows" %}
-      - {{ hms_docker_media_path }}/{{ folder.folder_name }}:/data_tv_{{ folder.folder_name | map('regex_replace', regex, replace) | list | join }}
-{% endif %}
-{% if folder.type == "movies" %}
-      - {{ hms_docker_media_path }}/{{ folder.folder_name }}:/data_movies_{{ folder.folder_name | map('regex_replace', regex, replace) | list | join }}
-{% endif %}
-{% endfor %}
-{% if nas_client_remote_additional_paths is defined and nas_client_use_additional_paths is defined and nas_client_use_additional_paths %}
-{% for path in nas_client_remote_additional_paths %}
-{% for folder in hms_docker_library_folders %}
-      - {{ path.local_mount_path }}/{{ hms_docker_library_folder_name }}/{{ folder.folder_name }}:/data_nas_additional/{{ path.name | map('regex_replace', regex, replace) | list | join }}/{{ folder.folder_name }}
-{% endfor %}
-{% endfor %}
-{% endif %}
+      - {{ hms_docker_mount_path }}_movies:/movies
+      - {{ hms_docker_mount_path }}_tv:/tv
+      - {{ hms_docker_mount_path }}_anime:/anime
+      - {{ hms_docker_mount_path }}_downloads:/downloads
 {% if hms_docker_container_map['bazarr']['traefik'] %}
     labels:
       - traefik.enable=true
