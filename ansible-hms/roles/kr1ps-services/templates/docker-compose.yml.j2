@@ -25,6 +25,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.portainer-{{ project_name }}.loadbalancer.server.port=9000
       - "traefik.http.routers.portainer-{{ project_name }}.middlewares=internal-ipwhitelist"
+      - "traefik.http.routers.portainer-{{ project_name }}.middlewares=external-ipwhitelist"
 {% endif %}
 {% endif %}
 
@@ -255,6 +256,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.sonarr-{{ project_name }}.loadbalancer.server.port=8989
       - "traefik.http.routers.sonarr-{{ project_name }}.middlewares=internal-ipwhitelist"
+      - "traefik.http.routers.sonarr-{{ project_name }}.middlewares=external-ipwhitelist"
 {% endif %}
     volumes:
       - {{ hms_docker_apps_path }}/sonarr/config:/config
@@ -305,6 +307,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.radarr-{{ project_name }}.loadbalancer.server.port=7878
       - "traefik.http.routers.radarr-{{ project_name }}.middlewares=internal-ipwhitelist"
+      - "traefik.http.routers.radarr-{{ project_name }}.middlewares=external-ipwhitelist"
 {% endif %}
     volumes:
       - {{ hms_docker_apps_path }}/radarr/config:/config
@@ -401,6 +404,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.overseerr-{{ project_name }}.loadbalancer.server.port=5055
       - "traefik.http.routers.overseerr-{{ project_name }}.middlewares=external-ipwhitelist"
+
 {% endif %}
     volumes:
       - {{ hms_docker_apps_path }}/overseerr/config:/config
@@ -465,6 +469,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.plex-{{ project_name }}.loadbalancer.server.port=32400
       - "traefik.http.routers.plex-{{ project_name }}.middlewares=internal-ipwhitelist"
+      - "traefik.http.routers.plex-{{ project_name }}.middlewares=external-ipwhitelist"
 {% endif %}
 {% endif %}
 
@@ -490,6 +495,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.tautulli-{{ project_name }}.loadbalancer.server.port=8181
       - "traefik.http.routers.tautulli-{{ project_name }}.middlewares=internal-ipwhitelist"
+      - "traefik.http.routers.tautulli-{{ project_name }}.middlewares=external-ipwhitelist"
 {% endif %}
 {% if container_expose_ports or not hms_docker_container_map['traefik']['enabled'] %}
     ports:
