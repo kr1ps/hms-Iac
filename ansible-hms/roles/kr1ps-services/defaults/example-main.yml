@@ -115,8 +115,8 @@ container_timezone: America/Santo_Domingo
 
 # User and Group ID's to use for the running processes in the containers (may cause or be the cause of permissions issues)
 #  default: "1234"
-container_uid: krips
-container_gid: krips
+container_uid: 1234
+container_gid: 1234
 
 # This will download all of the containers before attempting to start them // default: "yes"
 container_pull_images_first: yes
@@ -359,15 +359,15 @@ hms_docker_container_map:
     directory: yes
     traefik: yes
   sonarr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   radarr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   bazarr:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   transmission:
@@ -387,17 +387,22 @@ hms_docker_container_map:
     directory: yes
     traefik: yes
   plex:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   tautulli:
-    enabled: no
+    enabled: yes
     directory: yes
     traefik: yes
   nzbget:
     enabled: no
     directory: yes
     traefik: yes
+  deluge:
+    enabled: yes
+    directory: yes
+    traefik: yes
+
 
 plex_transcode_folder: "{{ hms_docker_apps_path }}/plex/transcode_temp" # default: "{{ hms_docker_apps_path }}/plex/transcode_temp"
 
