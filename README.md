@@ -118,7 +118,7 @@ It is recommended to read and follow this guide entirely as there is a lot of co
 
 
 
-## Configuration of the `vars/default.yml` or `ansible-hms/roles/kr1ps-services/defaults/example-main.yml` file
+## Configuration
 
 - Settings to configure:
 
