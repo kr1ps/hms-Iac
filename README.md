@@ -176,8 +176,9 @@ It is recommended to read and follow this guide entirely as there is a lot of co
 # perfom a terraform init for get the folder rdy with all the requirement
 terraform init
 
-# perfom a terraform apply for deploy the infraestructure to a vcenter environment. 
-terraform init
+# perfom a terraform apply for deploy the infraestructure to a vcenter environment.
+terraform apply
+
 
 
 # If you wish to run it against a remote host, add the host to the `inventory` file and then run the command:
