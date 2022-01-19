@@ -11,7 +11,7 @@ Terraform and Ansible project to setup an automated Home Media Server stack runn
 - [Installation](#installation)
 - [Content layout](#content-layout)
 - [Configuration](#configuration)
-- [Connecting the containers](#connecting-the-containers)
+
 
 ## Container list
 
