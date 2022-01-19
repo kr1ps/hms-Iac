@@ -116,6 +116,8 @@ It is recommended to read and follow this guide entirely as there is a lot of co
 
 5. copy `example-terraform.tfvars` to the same directory with the name terraform.tfvars and set the information for your vcenter environment as the examples.
 
+
+
 ## Configuration of the `vars/default.yml` or `ansible-hms/roles/kr1ps-services/defaults/example-main.yml` file
 
 - Settings to configure:
