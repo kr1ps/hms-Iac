@@ -179,11 +179,12 @@ terraform init
 # perfom a terraform apply for deploy the infraestructure to a vcenter environment.
 terraform apply
 
+The last 2 command will deploy the base server on a new vm in the vcenter environment with the ip "172.18.0.24". you can change this ip in this file "ansible-hms/00-installer-config.yaml".
 
+# To run it against a remote host, run the command:
 
-# If you wish to run it against a remote host, add the host to the `inventory` file and then run the command:
-ansible-playbook -i inventory --connection local hms-docker.yml
-ansible-playbook -i inventory hms-docker.yml
+ansible-playbook -u 'krips' -i '172.18.0.24,' ./ansible-hms/hms.yml  --key-file '~/.ssh/id_ed25519'
+
 ```
 
 Once the playbook has finished running, it may take up to a few minutes for the SSL certificate to be generated (if enabled).
@@ -206,17 +207,13 @@ Overseerr: `https://overseerr.{{ domain }}`
 
 Prowlarr: `https://prowlarr.{{ domain }}`
 
-Transmission: `https://transmission.{{ domain }}`
+deluge: `https://deluge.{{ domain }}`
 
 Tautulli: `https://tautulli.{{ domain }}`
 
 Traefik: `https://traefik.{{ domain }}`
 
-NZBGet: `https://nzbget.{{ domain }}`
 
 
 
 
-
-
-ansible-playbook -u '{{user-name}}' -i '{{static-ip}},' ./ansible-hms/hms.yml  --key-file '~/.ssh/id_ed25519'
